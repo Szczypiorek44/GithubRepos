@@ -1,4 +1,4 @@
-package pl.karolmichalski.tumblrphotos.data
+package pl.karolmichalski.githubrepos.data
 
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -11,10 +11,10 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.jackson.JacksonConverterFactory
 import javax.inject.Singleton
 
-private const val API_URL = "https://www.tumblr.com/docs/en/api/v1/"
+private const val API_URL = "https://api.github.com/"
 
 @Module
-class UserModule {
+class RepositoryModule {
 
 	@Provides
 	@Singleton

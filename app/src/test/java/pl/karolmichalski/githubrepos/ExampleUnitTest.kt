@@ -1,4 +1,4 @@
-package pl.karolmichalski.tumblrphotos
+package pl.karolmichalski.githubrepos
 
 import org.junit.Test
 

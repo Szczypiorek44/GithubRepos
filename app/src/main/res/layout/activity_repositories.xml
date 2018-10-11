@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="pl.karolmichalski.tumblrphotos.presentation.MainViewModel" />
+            type="pl.karolmichalski.githubrepos.presentation.repositories.RepositoriesViewModel" />
 
     </data>
 
@@ -14,7 +14,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.MainActivity">
+        tools:context=".presentation.repositories.RepositoriesActivity">
 
         <TextView
             android:layout_width="wrap_content"
