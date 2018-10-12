@@ -2,6 +2,7 @@ package pl.karolmichalski.githubrepos.presentation.repos
 
 import android.app.Application
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -23,6 +24,8 @@ class ReposViewModel(app: App) : ViewModel() {
 	init {
 		app.appComponent.inject(this)
 	}
+
+	val keywords = MutableLiveData<String>()
 
 	@Inject
 	lateinit var apiInterface: ApiInterface
