@@ -1,6 +1,6 @@
 package pl.karolmichalski.githubrepos.domain
 
-interface GithubRepository {
+interface GithubRepos {
 
 	fun findRepository(keyword: String){
 

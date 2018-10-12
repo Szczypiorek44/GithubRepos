@@ -1,4 +1,4 @@
-package pl.karolmichalski.githubrepos.presentation.repositories
+package pl.karolmichalski.githubrepos.presentation.repos
 
 import android.app.Application
 import android.util.Log
@@ -11,12 +11,12 @@ import pl.karolmichalski.githubrepos.data.ApiInterface
 import pl.karolmichalski.githubrepos.presentation.App
 import javax.inject.Inject
 
-class RepositoriesViewModel(app: App) : ViewModel() {
+class ReposViewModel(app: App) : ViewModel() {
 
 	class Factory(private val application: Application) : ViewModelProvider.NewInstanceFactory() {
 		override fun <T : ViewModel?> create(modelClass: Class<T>): T {
 			@Suppress("UNCHECKED_CAST")
-			return RepositoriesViewModel(application as App) as T
+			return ReposViewModel(application as App) as T
 		}
 	}
 
@@ -28,7 +28,7 @@ class RepositoriesViewModel(app: App) : ViewModel() {
 	lateinit var apiInterface: ApiInterface
 
 	fun findRepository() {
-		apiInterface.findRepository("retrofit")
+		apiInterface.findRepos("retrofit")
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
 				.subscribeBy(

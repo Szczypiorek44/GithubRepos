@@ -6,10 +6,14 @@ import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import okhttp3.logging.HttpLoggingInterceptor.Level.BODY
+import okhttp3.logging.HttpLoggingInterceptor.Level.NONE
+import pl.karolmichalski.githubrepos.BuildConfig
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.jackson.JacksonConverterFactory
 import javax.inject.Singleton
+
 
 private const val API_URL = "https://api.github.com/"
 
@@ -20,8 +24,12 @@ class RepositoryModule {
 	@Singleton
 	fun provideApiInterface(): ApiInterface {
 
+		val loggingInterceptor = HttpLoggingInterceptor().apply {
+			level = if (BuildConfig.DEBUG) BODY else NONE
+		}
+
 		val okHttpClient = OkHttpClient.Builder()
-				.addInterceptor(HttpLoggingInterceptor())
+				.addInterceptor(loggingInterceptor)
 				.build()
 
 		val objectMapper = ObjectMapper()

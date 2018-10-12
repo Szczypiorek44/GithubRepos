@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="pl.karolmichalski.githubrepos.presentation.repositories.RepositoriesViewModel" />
+            type="pl.karolmichalski.githubrepos.presentation.repos.ReposViewModel" />
 
     </data>
 
@@ -14,7 +14,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.repositories.RepositoriesActivity">
+        tools:context=".presentation.repos.ReposActivity">
 
         <TextView
             android:layout_width="wrap_content"
