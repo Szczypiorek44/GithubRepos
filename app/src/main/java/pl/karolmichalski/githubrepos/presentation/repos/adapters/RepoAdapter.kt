@@ -26,7 +26,7 @@ class RepoAdapter(private val onItemClick: (Repo) -> Unit) : ListAdapter<Repo, R
 		}
 
 		override fun areContentsTheSame(oldItem: Repo, newItem: Repo): Boolean {
-			return oldItem.name == newItem.name
+			return oldItem.name == newItem.name && oldItem.fullName == newItem.fullName
 		}
 	}
 
