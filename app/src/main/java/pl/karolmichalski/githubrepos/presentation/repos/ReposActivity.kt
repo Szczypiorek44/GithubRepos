@@ -1,5 +1,6 @@
 package pl.karolmichalski.githubrepos.presentation.repos
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,9 @@ import androidx.lifecycle.ViewModelProviders
 import pl.karolmichalski.githubrepos.R
 import pl.karolmichalski.githubrepos.data.models.Repo
 import pl.karolmichalski.githubrepos.databinding.ActivityReposBinding
+import pl.karolmichalski.githubrepos.presentation.details.DetailsActivity
+import pl.karolmichalski.githubrepos.presentation.details.owner
+import pl.karolmichalski.githubrepos.presentation.details.repo
 
 class ReposActivity : AppCompatActivity(), ReposListener {
 
@@ -36,7 +40,11 @@ class ReposActivity : AppCompatActivity(), ReposListener {
 
 	override fun onItemClick(): (Repo) -> Unit {
 		return {
-			Toast.makeText(this, it.name, Toast.LENGTH_SHORT).show()
+			val intent = Intent(this, DetailsActivity::class.java).apply {
+				owner = it.owner.login
+				repo = it.name
+			}
+			startActivity(intent)
 		}
 	}
 

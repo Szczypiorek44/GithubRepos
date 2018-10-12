@@ -1,4 +1,4 @@
-package pl.karolmichalski.githubrepos.presentation.repos
+package pl.karolmichalski.githubrepos.presentation.details
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
@@ -12,17 +12,16 @@ import pl.karolmichalski.githubrepos.data.models.Repo
 import pl.karolmichalski.githubrepos.presentation.App
 import javax.inject.Inject
 
-class ReposViewModel(app: App) : ViewModel() {
+class DetailsViewModel(app: App) : ViewModel() {
 
 	class Factory(private val application: Application) : ViewModelProvider.NewInstanceFactory() {
 		override fun <T : ViewModel?> create(modelClass: Class<T>): T {
 			@Suppress("UNCHECKED_CAST")
-			return ReposViewModel(application as App) as T
+			return DetailsViewModel(application as App) as T
 		}
 	}
 
-	val keywords = MutableLiveData<String>()
-	val repoList = MutableLiveData<List<Repo>>().apply { value = ArrayList() }
+	val repo = MutableLiveData<Repo>()
 	val isLoading = MutableLiveData<Boolean>().apply { value = false }
 	val errorMessage = MutableLiveData<String>()
 
@@ -33,18 +32,21 @@ class ReposViewModel(app: App) : ViewModel() {
 		app.appComponent.inject(this)
 	}
 
-	fun findRepos() {
-		keywords.value?.let { keywords ->
-			apiInterface.findRepos(keywords)
-					.subscribeOn(Schedulers.io())
-					.observeOn(AndroidSchedulers.mainThread())
-					.doOnSubscribe { isLoading.postValue(true) }
-					.doFinally { isLoading.postValue(false) }
-					.subscribeBy(
-							onSuccess = { repoList.value = it.repoList },
-							onError = { errorMessage.value = it.localizedMessage })
-		}
-
+	fun getRepoDetails(owner: String, repo: String) {
+		apiInterface.getRepoDetails(owner, repo)
+				.subscribeOn(Schedulers.io())
+				.observeOn(AndroidSchedulers.mainThread())
+				.doOnSubscribe { isLoading.postValue(true) }
+				.doFinally { isLoading.postValue(false) }
+				.subscribeBy(
+						onSuccess = {
+							this.repo.value = it
+						},
+						onError = {
+							errorMessage.value = it.localizedMessage
+						}
+				)
 	}
+
 
 }
