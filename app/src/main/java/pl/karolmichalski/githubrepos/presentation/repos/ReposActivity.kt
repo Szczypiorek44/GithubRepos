@@ -16,8 +16,6 @@ import pl.karolmichalski.githubrepos.presentation.details.repo
 
 class ReposActivity : AppCompatActivity(), ReposListener {
 
-	//collapsable action bar
-
 	private val viewModel by lazy {
 		ViewModelProviders.of(this, ReposViewModel.Factory(application)).get(ReposViewModel::class.java)
 	}

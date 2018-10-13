@@ -31,12 +31,12 @@ class DetailsActivity : AppCompatActivity(), DetailsListener {
 			viewModel = this@DetailsActivity.viewModel
 			listener = this@DetailsActivity
 		}
-		viewModel.repo.observe(this, Observer {
-			binding.invalidateAll()
-		})
-		viewModel.errorMessage.observe(this, Observer {
-			Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-		})
-		viewModel.getRepoDetails(intent.owner, intent.repo)
+		viewModel.apply {
+			repo.observe(this@DetailsActivity, Observer { binding.invalidateAll() })
+			errorMessage.observe(this@DetailsActivity, Observer {
+				Toast.makeText(this@DetailsActivity, it, Toast.LENGTH_SHORT).show()
+			})
+			getRepoDetails(intent.owner, intent.repo)
+		}
 	}
 }
