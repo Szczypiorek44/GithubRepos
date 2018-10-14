@@ -1,4 +1,4 @@
-package pl.karolmichalski.githubrepos.data
+package pl.karolmichalski.githubrepos.data.repos
 
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper

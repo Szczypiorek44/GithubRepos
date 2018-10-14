@@ -1,4 +1,4 @@
-package pl.karolmichalski.githubrepos.data
+package pl.karolmichalski.githubrepos.data.repos
 
 import io.reactivex.Single
 import pl.karolmichalski.githubrepos.data.models.Repo
