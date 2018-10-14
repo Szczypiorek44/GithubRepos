@@ -34,8 +34,7 @@ class ReposViewModel(app: App) : ViewModel() {
 	}
 
 	fun findRepos() {
-		keywords.value?.let { keywords ->
-			githubRepos.findRepos(keywords)
+			githubRepos.findRepos(keywords.value)
 					.subscribeOn(Schedulers.io())
 					.observeOn(AndroidSchedulers.mainThread())
 					.doOnSubscribe { isLoading.postValue(true) }
@@ -43,7 +42,6 @@ class ReposViewModel(app: App) : ViewModel() {
 					.subscribeBy(
 							onSuccess = { repoList.value = it },
 							onError = { errorMessage.value = it.localizedMessage })
-		}
 
 	}
 

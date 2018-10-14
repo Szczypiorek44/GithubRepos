@@ -6,10 +6,10 @@ import pl.karolmichalski.githubrepos.domain.GithubRepos
 
 class GithubReposImpl(private val apiInterface: ApiInterface) : GithubRepos {
 
-	override fun findRepos(keyword: String): Single<List<Repo>> {
+	override fun findRepos(keywords: String?): Single<List<Repo>> {
 		return when {
-			keyword.isBlank() -> Single.fromCallable { throw Exception("Enter keywords") }
-			else -> apiInterface.findRepos(keyword).flatMap { Single.just(it.repoList) }
+			keywords.isNullOrBlank() -> Single.fromCallable { throw Exception("Enter keywords") }
+			else -> apiInterface.findRepos(keywords!!).flatMap { Single.just(it.repoList) }
 		}
 	}
 
