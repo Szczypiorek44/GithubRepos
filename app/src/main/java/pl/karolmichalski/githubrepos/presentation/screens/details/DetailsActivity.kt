@@ -51,16 +51,12 @@ class DetailsActivity : AppCompatActivity() {
 			button2text = this@DetailsActivity.getString(R.string.no)
 			onButton1Click = {
 				dismiss()
-				doMagic()
+				viewModel.doMagic()
 			}
 			onButton2Click = {
 				dismiss()
 			}
 			show(supportFragmentManager, DecisionDialog::class.java.simpleName)
 		}
-	}
-
-	private fun doMagic() {
-
 	}
 }

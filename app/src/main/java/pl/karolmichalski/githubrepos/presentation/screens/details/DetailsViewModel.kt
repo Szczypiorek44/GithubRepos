@@ -29,6 +29,7 @@ class DetailsViewModel(app: App) : ViewModel() {
 	lateinit var githubRepos: GithubRepos
 
 	init {
+		System.loadLibrary("native-lib")
 		app.appComponent.inject(this)
 	}
 
@@ -44,5 +45,6 @@ class DetailsViewModel(app: App) : ViewModel() {
 				)
 	}
 
+	external fun doMagic(): String
 
 }
