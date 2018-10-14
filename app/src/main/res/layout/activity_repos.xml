@@ -60,7 +60,8 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:onItemClick="@{listener.onItemClick}"
-            app:repoList="@{viewModel.repoList}"
+            app:repoList="@{viewModel.repoList2}"
+            app:retry="@{listener.retry}"
             tools:listitem="@layout/item_repo" />
 
         <pl.karolmichalski.githubrepos.presentation.customviews.LoadingLayout

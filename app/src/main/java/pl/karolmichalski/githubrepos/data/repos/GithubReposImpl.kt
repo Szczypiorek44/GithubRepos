@@ -17,6 +17,13 @@ class GithubReposImpl(private val context: Context,
 		}
 	}
 
+	override fun findRepos(keywords: String?, page: Int): Single<List<Repo>> {
+		return when {
+			keywords.isNullOrBlank() -> Single.fromCallable { throw BlankInputException(context.getString(R.string.enter_keywords)) }
+			else -> apiService.findRepos(keywords!!, page).flatMap { Single.just(it.repoList) }
+		}
+	}
+
 	override fun getRepoDetails(owner: String, repo: String): Single<Repo> {
 		return apiService.getRepoDetails(owner, repo)
 	}

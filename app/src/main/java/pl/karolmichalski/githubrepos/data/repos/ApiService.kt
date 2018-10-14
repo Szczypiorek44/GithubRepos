@@ -10,7 +10,10 @@ import retrofit2.http.Query
 interface ApiService {
 
 	@GET("/search/repositories")
-	fun findRepos(@Query("q") keyword: String): Single<FindReposResponse>
+	fun findRepos(@Query("q") keywords: String): Single<FindReposResponse>
+
+	@GET("/search/repositories")
+	fun findRepos(@Query("q") keywords: String, @Query("page") page: Int): Single<FindReposResponse>
 
 	@GET("/repos/{owner}/{repo}")
 	fun getRepoDetails(@Path("owner") owner: String, @Path("repo") repo: String): Single<Repo>

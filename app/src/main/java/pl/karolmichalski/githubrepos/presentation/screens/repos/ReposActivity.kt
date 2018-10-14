@@ -2,11 +2,15 @@ package pl.karolmichalski.githubrepos.presentation.screens.repos
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import kotlinx.android.synthetic.main.item_list_footer.*
+import pl.karolmichalski.githubrepos.ERROR
+import pl.karolmichalski.githubrepos.LOADING
 import pl.karolmichalski.githubrepos.R
 import pl.karolmichalski.githubrepos.data.models.Repo
 import pl.karolmichalski.githubrepos.databinding.ActivityReposBinding
@@ -66,6 +70,21 @@ class ReposActivity : AppCompatActivity(), ReposListener {
 			}
 			startActivity(intent)
 		}
+	}
+
+	override fun retry(): () -> Unit {
+		return { viewModel.retry() }
+	}
+
+	private fun initState() {
+		txt_error.setOnClickListener { viewModel.retry() }
+		viewModel.getState().observe(this, Observer { state ->
+			progress_bar.visibility = if (viewModel.listIsEmpty() && state == LOADING) View.VISIBLE else View.GONE
+			txt_error.visibility = if (viewModel.listIsEmpty() && state == ERROR) View.VISIBLE else View.GONE
+			if (!viewModel.listIsEmpty()) {
+//				newsListAdapter.setState(state ?: State.DONE)
+			}
+		})
 	}
 
 }

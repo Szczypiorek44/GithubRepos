@@ -45,6 +45,7 @@ dependencies {
 
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation "androidx.cardview:cardview:$appcompat_version"
+    implementation "androidx.paging:paging-runtime:2.1.0-alpha01"
     implementation "com.google.android.material:material:$appcompat_version"
 
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

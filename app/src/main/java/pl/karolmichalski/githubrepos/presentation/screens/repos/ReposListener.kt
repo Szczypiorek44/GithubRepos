@@ -6,4 +6,6 @@ interface ReposListener {
 	fun onSearchClick()
 
 	fun onItemClick(): (Repo) -> Unit
+
+	fun retry(): () -> Unit
 }
