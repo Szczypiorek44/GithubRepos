@@ -1,5 +1,6 @@
 package pl.karolmichalski.githubrepos.data.repos
 
+import android.content.Context
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import dagger.Module
@@ -19,12 +20,12 @@ import javax.inject.Singleton
 private const val API_URL = "https://api.github.com/"
 
 @Module
-class ReposModule {
+class ReposModule(private val context: Context) {
 
 	@Provides
 	@Singleton
 	fun provideGithubRepos(apiInterface: ApiInterface): GithubRepos {
-		return GithubReposImpl(apiInterface)
+		return GithubReposImpl(context, apiInterface)
 	}
 
 	@Provides

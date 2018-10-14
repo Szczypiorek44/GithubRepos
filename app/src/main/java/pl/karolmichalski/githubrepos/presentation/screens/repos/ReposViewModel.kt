@@ -1,6 +1,7 @@
 package pl.karolmichalski.githubrepos.presentation.screens.repos
 
 import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -9,10 +10,11 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import pl.karolmichalski.githubrepos.data.models.Repo
 import pl.karolmichalski.githubrepos.domain.GithubRepos
+import pl.karolmichalski.githubrepos.domain.exceptions.BlankInputException
 import pl.karolmichalski.githubrepos.presentation.App
 import javax.inject.Inject
 
-class ReposViewModel(app: App) : ViewModel() {
+class ReposViewModel(app: App) : AndroidViewModel(app) {
 
 	class Factory(private val application: Application) : ViewModelProvider.NewInstanceFactory() {
 		override fun <T : ViewModel?> create(modelClass: Class<T>): T {
@@ -34,14 +36,18 @@ class ReposViewModel(app: App) : ViewModel() {
 	}
 
 	fun findRepos() {
-			githubRepos.findRepos(keywords.value)
-					.subscribeOn(Schedulers.io())
-					.observeOn(AndroidSchedulers.mainThread())
-					.doOnSubscribe { isLoading.postValue(true) }
-					.doFinally { isLoading.postValue(false) }
-					.subscribeBy(
-							onSuccess = { repoList.value = it },
-							onError = { errorMessage.value = it.localizedMessage })
+		githubRepos.findRepos(keywords.value)
+				.subscribeOn(Schedulers.io())
+				.observeOn(AndroidSchedulers.mainThread())
+				.doOnSubscribe { isLoading.postValue(true) }
+				.doFinally { isLoading.postValue(false) }
+				.subscribeBy(
+						onSuccess = { repoList.value = it },
+						onError = {
+							if (it is BlankInputException)
+								repoList.value = ArrayList()
+							errorMessage.value = it.localizedMessage
+						})
 
 	}
 
