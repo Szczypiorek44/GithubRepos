@@ -15,14 +15,14 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name="pl.karolmichalski.githubrepos.presentation.repos.ReposActivity">
+        <activity android:name="pl.karolmichalski.githubrepos.presentation.screens.repos.ReposActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".presentation.details.DetailsActivity" />
+        <activity android:name="pl.karolmichalski.githubrepos.presentation.screens.details.DetailsActivity" />
 
     </application>
 

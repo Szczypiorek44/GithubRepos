@@ -1,4 +1,4 @@
-package pl.karolmichalski.githubrepos.presentation.repos
+package pl.karolmichalski.githubrepos.presentation.screens.repos
 
 import pl.karolmichalski.githubrepos.data.models.Repo
 

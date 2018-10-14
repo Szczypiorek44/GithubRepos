@@ -9,11 +9,11 @@
 
         <variable
             name="viewModel"
-            type="pl.karolmichalski.githubrepos.presentation.repos.ReposViewModel" />
+            type="pl.karolmichalski.githubrepos.presentation.screens.repos.ReposViewModel" />
 
         <variable
             name="listener"
-            type="pl.karolmichalski.githubrepos.presentation.repos.ReposListener" />
+            type="pl.karolmichalski.githubrepos.presentation.screens.repos.ReposListener" />
 
     </data>
 

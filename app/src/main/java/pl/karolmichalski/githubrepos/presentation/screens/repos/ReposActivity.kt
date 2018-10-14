@@ -1,4 +1,4 @@
-package pl.karolmichalski.githubrepos.presentation.repos
+package pl.karolmichalski.githubrepos.presentation.screens.repos
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,9 +10,9 @@ import androidx.lifecycle.ViewModelProviders
 import pl.karolmichalski.githubrepos.R
 import pl.karolmichalski.githubrepos.data.models.Repo
 import pl.karolmichalski.githubrepos.databinding.ActivityReposBinding
-import pl.karolmichalski.githubrepos.presentation.details.DetailsActivity
-import pl.karolmichalski.githubrepos.presentation.details.owner
-import pl.karolmichalski.githubrepos.presentation.details.repo
+import pl.karolmichalski.githubrepos.presentation.screens.details.DetailsActivity
+import pl.karolmichalski.githubrepos.presentation.screens.details.owner
+import pl.karolmichalski.githubrepos.presentation.screens.details.repo
 
 class ReposActivity : AppCompatActivity(), ReposListener {
 

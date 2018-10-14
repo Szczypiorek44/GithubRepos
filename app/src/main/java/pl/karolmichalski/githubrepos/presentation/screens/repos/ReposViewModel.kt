@@ -1,4 +1,4 @@
-package pl.karolmichalski.githubrepos.presentation.repos
+package pl.karolmichalski.githubrepos.presentation.screens.repos
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData

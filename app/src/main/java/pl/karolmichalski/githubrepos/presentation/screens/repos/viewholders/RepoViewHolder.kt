@@ -1,4 +1,4 @@
-package pl.karolmichalski.githubrepos.presentation.repos.viewholders
+package pl.karolmichalski.githubrepos.presentation.screens.repos.viewholders
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

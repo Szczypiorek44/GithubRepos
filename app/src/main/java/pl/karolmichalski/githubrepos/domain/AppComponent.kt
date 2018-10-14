@@ -2,8 +2,8 @@ package pl.karolmichalski.githubrepos.domain
 
 import dagger.Component
 import pl.karolmichalski.githubrepos.data.RepositoryModule
-import pl.karolmichalski.githubrepos.presentation.details.DetailsViewModel
-import pl.karolmichalski.githubrepos.presentation.repos.ReposViewModel
+import pl.karolmichalski.githubrepos.presentation.screens.details.DetailsViewModel
+import pl.karolmichalski.githubrepos.presentation.screens.repos.ReposViewModel
 import javax.inject.Singleton
 
 @Singleton
