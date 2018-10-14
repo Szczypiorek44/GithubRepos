@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModelProvider
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import pl.karolmichalski.githubrepos.data.ApiInterface
 import pl.karolmichalski.githubrepos.data.models.Repo
+import pl.karolmichalski.githubrepos.domain.GithubRepos
 import pl.karolmichalski.githubrepos.presentation.App
 import javax.inject.Inject
 
@@ -26,25 +26,21 @@ class DetailsViewModel(app: App) : ViewModel() {
 	val errorMessage = MutableLiveData<String>()
 
 	@Inject
-	lateinit var apiInterface: ApiInterface
+	lateinit var githubRepos: GithubRepos
 
 	init {
 		app.appComponent.inject(this)
 	}
 
 	fun getRepoDetails(owner: String, repo: String) {
-		apiInterface.getRepoDetails(owner, repo)
+		githubRepos.getRepoDetails(owner, repo)
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
 				.doOnSubscribe { isLoading.postValue(true) }
 				.doFinally { isLoading.postValue(false) }
 				.subscribeBy(
-						onSuccess = {
-							this.repo.value = it
-						},
-						onError = {
-							errorMessage.value = it.localizedMessage
-						}
+						onSuccess = { this.repo.value = it },
+						onError = { errorMessage.value = it.localizedMessage }
 				)
 	}
 

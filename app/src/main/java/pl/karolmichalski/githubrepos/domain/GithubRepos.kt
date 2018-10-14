@@ -1,8 +1,9 @@
 package pl.karolmichalski.githubrepos.domain
 
+import io.reactivex.Single
+import pl.karolmichalski.githubrepos.data.models.Repo
+
 interface GithubRepos {
-
-	fun findRepository(keyword: String){
-
-	}
+	fun findRepos(keyword: String): Single<List<Repo>>
+	fun getRepoDetails(owner: String, repo: String): Single<Repo>
 }

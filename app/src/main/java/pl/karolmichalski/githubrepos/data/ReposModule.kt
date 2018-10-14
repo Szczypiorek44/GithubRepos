@@ -9,6 +9,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level.BODY
 import okhttp3.logging.HttpLoggingInterceptor.Level.NONE
 import pl.karolmichalski.githubrepos.BuildConfig
+import pl.karolmichalski.githubrepos.domain.GithubRepos
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.jackson.JacksonConverterFactory
@@ -18,12 +19,17 @@ import javax.inject.Singleton
 private const val API_URL = "https://api.github.com/"
 
 @Module
-class RepositoryModule {
+class ReposModule {
+
+	@Provides
+	@Singleton
+	fun provideGithubRepos(apiInterface: ApiInterface): GithubRepos {
+		return GithubReposImpl(apiInterface)
+	}
 
 	@Provides
 	@Singleton
 	fun provideApiInterface(): ApiInterface {
-
 		val loggingInterceptor = HttpLoggingInterceptor().apply {
 			level = if (BuildConfig.DEBUG) BODY else NONE
 		}
