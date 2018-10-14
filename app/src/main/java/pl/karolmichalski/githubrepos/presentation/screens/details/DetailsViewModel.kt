@@ -45,6 +45,6 @@ class DetailsViewModel(app: App) : ViewModel() {
 				)
 	}
 
-	external fun doMagic(): String
+	external fun getMagic(repo: Repo?): Int
 
 }

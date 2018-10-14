@@ -1,10 +1,13 @@
 #include <jni.h>
-#include <string>
 
-extern "C" JNIEXPORT jstring JNICALL
-Java_pl_karolmichalski_githubrepos_presentation_screens_details_DetailsViewModel_doMagic(
+extern "C" JNIEXPORT jint JNICALL
+Java_pl_karolmichalski_githubrepos_presentation_screens_details_DetailsViewModel_getMagic(
         JNIEnv *env,
-        jobject /* this */) {
-    std::string hello = "Hello from C++";
-    return env->NewStringUTF(hello.c_str());
+        jobject /* this */,
+        jobject obj)
+{
+    jclass cls = env->GetObjectClass(obj);
+    jfieldID fieldId = env->GetFieldID(cls, "id", "I");
+    int id = env->GetIntField(obj, fieldId);
+    return id;
 }

@@ -39,7 +39,7 @@ class DetailsActivity : AppCompatActivity() {
 			})
 			getRepoDetails(intent.owner, intent.repo)
 		}
-		card2.setOnClickListener{
+		card2.setOnClickListener {
 			showDecisionDialog()
 		}
 	}
@@ -51,7 +51,8 @@ class DetailsActivity : AppCompatActivity() {
 			button2text = this@DetailsActivity.getString(R.string.no)
 			onButton1Click = {
 				dismiss()
-				viewModel.doMagic()
+				val magic = viewModel.getMagic(viewModel.repo.value)
+				Toast.makeText(activity, this@DetailsActivity.getString(R.string.magic_number_is, magic), Toast.LENGTH_SHORT).show()
 			}
 			onButton2Click = {
 				dismiss()
