@@ -24,13 +24,13 @@ class ReposModule(private val context: Context) {
 
 	@Provides
 	@Singleton
-	fun provideGithubRepos(apiInterface: ApiInterface): GithubRepos {
-		return GithubReposImpl(context, apiInterface)
+	fun provideGithubRepos(apiService: ApiService): GithubRepos {
+		return GithubReposImpl(context, apiService)
 	}
 
 	@Provides
 	@Singleton
-	fun provideApiInterface(): ApiInterface {
+	fun provideApiService(): ApiService {
 		val loggingInterceptor = HttpLoggingInterceptor().apply {
 			level = if (BuildConfig.DEBUG) BODY else NONE
 		}
@@ -49,6 +49,6 @@ class ReposModule(private val context: Context) {
 				.addConverterFactory(JacksonConverterFactory.create(objectMapper))
 				.build()
 
-		return retrofit.create(ApiInterface::class.java)
+		return retrofit.create(ApiService::class.java)
 	}
 }
