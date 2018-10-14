@@ -18,15 +18,17 @@ fun RecyclerView.setRepos(repoList: List<Repo>, onItemClick: (Repo) -> Unit) {
 	(adapter as RepoAdapter).submitList(repoList)
 }
 
-class RepoAdapter(private val onItemClick: (Repo) -> Unit) : ListAdapter<Repo, RepoViewHolder>(RepoDiff()) {
+class RepoAdapter(private val onItemClick: (Repo) -> Unit) : ListAdapter<Repo, RepoViewHolder>(DIFF_CALLBACK) {
 
-	class RepoDiff : DiffUtil.ItemCallback<Repo>() {
-		override fun areItemsTheSame(oldItem: Repo, newItem: Repo): Boolean {
-			return oldItem.id == newItem.id
-		}
+	companion object {
+		private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Repo>() {
+			override fun areItemsTheSame(oldItem: Repo, newItem: Repo): Boolean {
+				return oldItem.id == newItem.id
+			}
 
-		override fun areContentsTheSame(oldItem: Repo, newItem: Repo): Boolean {
-			return oldItem.name == newItem.name && oldItem.fullName == newItem.fullName
+			override fun areContentsTheSame(oldItem: Repo, newItem: Repo): Boolean {
+				return oldItem.name == newItem.name && oldItem.fullName == newItem.fullName
+			}
 		}
 	}
 
