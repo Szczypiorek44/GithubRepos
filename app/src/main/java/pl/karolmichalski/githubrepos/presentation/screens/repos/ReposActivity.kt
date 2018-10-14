@@ -13,9 +13,13 @@ import pl.karolmichalski.githubrepos.databinding.ActivityReposBinding
 import pl.karolmichalski.githubrepos.presentation.screens.details.DetailsActivity
 import pl.karolmichalski.githubrepos.presentation.screens.details.owner
 import pl.karolmichalski.githubrepos.presentation.screens.details.repo
+import pl.karolmichalski.githubrepos.presentation.utils.BundleDelegate
 import pl.karolmichalski.githubrepos.presentation.utils.hideSoftKeyboard
 
 class ReposActivity : AppCompatActivity(), ReposListener {
+
+	private var Bundle.keywords by BundleDelegate.String("keywords")
+	private var Bundle.repoList by BundleDelegate.List<Repo>("repoList")
 
 	private val viewModel by lazy {
 		ViewModelProviders.of(this, ReposViewModel.Factory(application)).get(ReposViewModel::class.java)
@@ -31,6 +35,22 @@ class ReposActivity : AppCompatActivity(), ReposListener {
 		viewModel.errorMessage.observe(this, Observer {
 			Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
 		})
+	}
+
+	override fun onSaveInstanceState(outState: Bundle?) {
+		super.onSaveInstanceState(outState)
+		viewModel.keywords.value?.let { keywords ->
+			outState?.keywords = keywords
+		}
+		viewModel.repoList.value?.let { repoList ->
+			outState?.repoList = repoList
+		}
+	}
+
+	override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+		super.onRestoreInstanceState(savedInstanceState)
+		viewModel.keywords.value = savedInstanceState?.keywords
+		viewModel.repoList.value = savedInstanceState?.repoList
 	}
 
 	override fun onSearchClick() {
