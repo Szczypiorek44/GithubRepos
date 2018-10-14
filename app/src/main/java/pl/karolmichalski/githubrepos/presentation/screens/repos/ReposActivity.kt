@@ -13,6 +13,7 @@ import pl.karolmichalski.githubrepos.databinding.ActivityReposBinding
 import pl.karolmichalski.githubrepos.presentation.screens.details.DetailsActivity
 import pl.karolmichalski.githubrepos.presentation.screens.details.owner
 import pl.karolmichalski.githubrepos.presentation.screens.details.repo
+import pl.karolmichalski.githubrepos.presentation.utils.hideSoftKeyboard
 
 class ReposActivity : AppCompatActivity(), ReposListener {
 
@@ -33,6 +34,7 @@ class ReposActivity : AppCompatActivity(), ReposListener {
 	}
 
 	override fun onSearchClick() {
+		hideSoftKeyboard()
 		viewModel.findRepos()
 	}
 
