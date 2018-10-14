@@ -8,9 +8,9 @@ import androidx.lifecycle.ViewModelProvider
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import pl.karolmichalski.githubrepos.data.exceptions.BlankInputException
 import pl.karolmichalski.githubrepos.data.models.Repo
 import pl.karolmichalski.githubrepos.domain.GithubRepos
-import pl.karolmichalski.githubrepos.domain.exceptions.BlankInputException
 import pl.karolmichalski.githubrepos.presentation.App
 import javax.inject.Inject
 
