@@ -5,12 +5,10 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.observers.DisposableSingleObserver
 import pl.karolmichalski.githubrepos.data.exceptions.BlankInputException
 import pl.karolmichalski.githubrepos.data.models.Repo
-import pl.karolmichalski.githubrepos.domain.GithubRepos
+import pl.karolmichalski.githubrepos.domain.interactors.FindReposUseCase
 import pl.karolmichalski.githubrepos.presentation.App
 import javax.inject.Inject
 
@@ -29,26 +27,25 @@ class ReposViewModel(app: App) : AndroidViewModel(app) {
 	val errorMessage = MutableLiveData<String>()
 
 	@Inject
-	lateinit var githubRepos: GithubRepos
+	lateinit var findReposUseCase: FindReposUseCase
 
 	init {
 		app.appComponent.inject(this)
 	}
 
 	fun findRepos() {
-		githubRepos.findRepos(keywords.value)
-				.subscribeOn(Schedulers.io())
-				.observeOn(AndroidSchedulers.mainThread())
-				.doOnSubscribe { isLoading.postValue(true) }
-				.doFinally { isLoading.postValue(false) }
-				.subscribeBy(
-						onSuccess = { repoList.value = it },
-						onError = {
-							if (it is BlankInputException)
-								repoList.value = ArrayList()
-							errorMessage.value = it.localizedMessage
-						})
+		findReposUseCase.execute(object : DisposableSingleObserver<List<Repo>>() {
+			override fun onSuccess(t: List<Repo>) {
+				repoList.value = t
+			}
 
+			override fun onError(e: Throwable) {
+				if (e is BlankInputException)
+					repoList.value = ArrayList()
+				errorMessage.value = e.localizedMessage
+			}
+
+		}, keywords.value)
 	}
 
 }

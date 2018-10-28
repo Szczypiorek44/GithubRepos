@@ -5,7 +5,7 @@ import io.reactivex.Single
 import pl.karolmichalski.githubrepos.R
 import pl.karolmichalski.githubrepos.data.exceptions.BlankInputException
 import pl.karolmichalski.githubrepos.data.models.Repo
-import pl.karolmichalski.githubrepos.domain.GithubRepos
+import pl.karolmichalski.githubrepos.domain.repositories.GithubRepos
 
 class GithubReposImpl(private val context: Context,
 					  private val apiService: ApiService) : GithubRepos {
