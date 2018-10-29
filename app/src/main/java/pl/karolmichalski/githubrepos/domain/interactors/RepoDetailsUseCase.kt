@@ -5,8 +5,8 @@ import pl.karolmichalski.githubrepos.data.models.Repo
 import pl.karolmichalski.githubrepos.domain.repositories.GithubRepos
 import javax.inject.Inject
 
-class FindReposUseCase @Inject constructor(private val githubRepos: GithubRepos) {
+class RepoDetailsUseCase @Inject constructor(private val githubRepos: GithubRepos) {
 
-	fun execute(keywords: String?): Single<List<Repo>> = githubRepos.findRepos(keywords)
+	fun execute(owner: String, repo: String): Single<Repo> = githubRepos.getRepoDetails(owner, repo)
 
 }

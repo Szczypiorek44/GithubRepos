@@ -8,7 +8,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import pl.karolmichalski.githubrepos.data.models.Repo
-import pl.karolmichalski.githubrepos.domain.repositories.GithubRepos
+import pl.karolmichalski.githubrepos.domain.interactors.RepoDetailsUseCase
 import pl.karolmichalski.githubrepos.presentation.App
 import javax.inject.Inject
 
@@ -26,7 +26,7 @@ class DetailsViewModel(app: App) : ViewModel() {
 	val errorMessage = MutableLiveData<String>()
 
 	@Inject
-	lateinit var githubRepos: GithubRepos
+	lateinit var repoDetailsUseCase: RepoDetailsUseCase
 
 	init {
 		System.loadLibrary("native-lib")
@@ -34,7 +34,7 @@ class DetailsViewModel(app: App) : ViewModel() {
 	}
 
 	fun getRepoDetails(owner: String, repo: String) {
-		githubRepos.getRepoDetails(owner, repo)
+		repoDetailsUseCase.execute(owner, repo)
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
 				.doOnSubscribe { isLoading.postValue(true) }

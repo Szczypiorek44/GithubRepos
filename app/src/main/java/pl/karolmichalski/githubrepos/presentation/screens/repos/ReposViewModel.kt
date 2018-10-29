@@ -10,7 +10,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import pl.karolmichalski.githubrepos.data.exceptions.BlankInputException
 import pl.karolmichalski.githubrepos.data.models.Repo
-import pl.karolmichalski.githubrepos.domain.interactors.FindReposUseCase
+import pl.karolmichalski.githubrepos.domain.interactors.RepoListUseCase
 import pl.karolmichalski.githubrepos.presentation.App
 import javax.inject.Inject
 
@@ -29,14 +29,14 @@ class ReposViewModel(app: App) : AndroidViewModel(app) {
 	val errorMessage = MutableLiveData<String>()
 
 	@Inject
-	lateinit var findReposUseCase: FindReposUseCase
+	lateinit var repoListUseCase: RepoListUseCase
 
 	init {
 		app.appComponent.inject(this)
 	}
 
 	fun findRepos() {
-		findReposUseCase.execute(keywords.value)
+		repoListUseCase.execute(keywords.value)
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
 				.doOnSubscribe { isLoading.postValue(true) }
