@@ -28,17 +28,13 @@ class DetailsActivity : AppCompatActivity() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		binding.apply {
-			setLifecycleOwner(this@DetailsActivity)
-			viewModel = this@DetailsActivity.viewModel
+		binding.let {
+			it.setLifecycleOwner(this)
+			it.viewModel = viewModel
 		}
-		viewModel.apply {
-			repo.observe(this@DetailsActivity, Observer { binding.invalidateAll() })
-			errorMessage.observe(this@DetailsActivity, Observer {
-				Toast.makeText(this@DetailsActivity, it, Toast.LENGTH_SHORT).show()
-			})
-			getRepoDetails(intent.owner, intent.repo)
-		}
+		viewModel.repo.observe(this, Observer { binding.invalidateAll() })
+		viewModel.errorMessage.observe(this, Observer { Toast.makeText(this, it, Toast.LENGTH_SHORT).show() })
+		viewModel.getRepoDetails(intent.owner, intent.repo)
 		card2.setOnClickListener {
 			showDecisionDialog()
 		}
