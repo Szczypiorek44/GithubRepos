@@ -29,14 +29,13 @@ class DecisionDialog : DialogFragment() {
 	var onButton2Click: () -> Unit = {}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-		val binding = DataBindingUtil.inflate<DialogDecisionBinding>(inflater, R.layout.dialog_decision, container, false).also {
+		return DataBindingUtil.inflate<DialogDecisionBinding>(inflater, R.layout.dialog_decision, container, false).also {
 			it.setLifecycleOwner(this)
 			it.title = this.title
 			it.button1text = this.button1text
 			it.button2text = this.button2text
 			it.onButton1Click = this.onButton1Click
 			it.onButton2Click = this.onButton2Click
-		}
-		return binding.root
+		}.root
 	}
 }
