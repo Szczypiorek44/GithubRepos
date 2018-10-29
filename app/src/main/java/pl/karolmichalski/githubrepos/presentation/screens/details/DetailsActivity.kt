@@ -49,19 +49,20 @@ class DetailsActivity : AppCompatActivity() {
 	}
 
 	private fun showDecisionDialog() {
-		DecisionDialog().apply {
-			title = this@DetailsActivity.getString(R.string.are_you_ready_for_some_magic_question)
-			button1text = this@DetailsActivity.getString(R.string.yes)
-			button2text = this@DetailsActivity.getString(R.string.no)
-			onButton1Click = {
-				dismiss()
-				val magic = viewModel.getMagic(viewModel.repo.value)
-				Toast.makeText(activity, this@DetailsActivity.getString(R.string.magic_number_is, magic), Toast.LENGTH_SHORT).show()
-			}
-			onButton2Click = {
-				dismiss()
-			}
-			show(supportFragmentManager, DecisionDialog::class.java.simpleName)
-		}
+		DecisionDialog.newInstance(
+				title = getString(R.string.are_you_ready_for_some_magic_question),
+				button1text = getString(R.string.yes),
+				button2text = getString(R.string.no))
+				.apply {
+					onButton1Click = {
+						dismiss()
+						val magic = viewModel.getMagic(viewModel.repo.value)
+						Toast.makeText(activity, getString(R.string.magic_number_is, magic), Toast.LENGTH_SHORT).show()
+					}
+					onButton2Click = {
+						dismiss()
+					}
+					show(supportFragmentManager, DecisionDialog::class.java.simpleName)
+				}
 	}
 }
