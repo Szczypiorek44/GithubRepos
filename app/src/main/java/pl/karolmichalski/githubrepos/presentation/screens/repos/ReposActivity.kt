@@ -1,6 +1,5 @@
 package pl.karolmichalski.githubrepos.presentation.screens.repos
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -11,8 +10,6 @@ import pl.karolmichalski.githubrepos.R
 import pl.karolmichalski.githubrepos.data.models.Repo
 import pl.karolmichalski.githubrepos.databinding.ActivityReposBinding
 import pl.karolmichalski.githubrepos.presentation.screens.details.DetailsActivity
-import pl.karolmichalski.githubrepos.presentation.screens.details.owner
-import pl.karolmichalski.githubrepos.presentation.screens.details.repo
 import pl.karolmichalski.githubrepos.presentation.utils.BundleDelegate
 import pl.karolmichalski.githubrepos.presentation.utils.hideSoftKeyboard
 
@@ -59,11 +56,8 @@ class ReposActivity : AppCompatActivity(), ReposListener {
 	}
 
 	override fun onItemClick(): (Repo) -> Unit {
-		return {
-			val intent = Intent(this, DetailsActivity::class.java).apply {
-				owner = it.owner.login
-				repo = it.name
-			}
+		return { repo ->
+			val intent = DetailsActivity.getIntent(this, repo.owner.login, repo.name)
 			startActivity(intent)
 		}
 	}
