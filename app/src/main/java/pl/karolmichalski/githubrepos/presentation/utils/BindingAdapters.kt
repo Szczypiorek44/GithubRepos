@@ -4,7 +4,6 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import pl.karolmichalski.githubrepos.R
-import pl.karolmichalski.githubrepos.data.glide.GlideApp
 
 
 @BindingAdapter("imageUrl")
